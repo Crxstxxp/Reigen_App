@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -33,8 +34,24 @@ const Login = () => {
   //Funcion asincrona para autentificaar al usuario, una vez autentificado navegar a la siguente pantalla, o sea, el menu ya dentro de la app
 
   const handleSubmit = async (e) => {
-    await login(user);
-    navigation.navigate("Menu");
+    if (await login(user)) {
+      navigation.navigate("Menu");
+      setUser({
+        email: "",
+        password: "",
+      })
+    } else {
+      Alert.alert(
+        "Usuario y/o contraseña incorrectos",
+        "Por favor intentelo nuevamente",
+        [
+          {
+            text: "Ok",
+            onPress: () => navigation.navigate("login"),
+          },
+        ]
+      );
+    }
   };
 
   return (

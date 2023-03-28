@@ -1,12 +1,15 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { GeneralStyles } from '../../theme/Styles'
-import TempList from '../../components/TempList'
+import { GeneralStyles, TempStyles } from '../../theme/Styles'
+import HumeContainer from '../../components/HumeContainer'
+import HumedadList from '../../components/HumedadList'
 
 const Humedad = () => {
   return (
     <View style={GeneralStyles.container}>
-      <Text style={GeneralStyles.subTitle}>Humedad</Text>
+      <HumeContainer/>
+      <Text style={TempStyles.TempSubTitle}> Ultima semana </Text>
+      <HumedadList/>
     </View>
   )
 }

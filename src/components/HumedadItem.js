@@ -1,11 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 
-const TempItem = ({ data }) => {
-  
+const HumedadItem = ({ data }) => {
   return (
     <View style={styles.ItemContainer}>
-      <Text style={styles.dataTitle}> Temperatura: {data.sensors[0].temperature}º </Text>
+      <Text style={styles.dataTitle}> Humedad: {data.sensors[0].humidity}% </Text>
     </View>
   );
 };
@@ -22,5 +21,4 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
 });
-
-export default TempItem;
+export default HumedadItem;

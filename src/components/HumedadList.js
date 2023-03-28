@@ -1,32 +1,31 @@
 import { FlatList, RefreshControl } from "react-native";
 import React, { useEffect, useState } from "react";
 
-import TempItem from "./TempItem";
+import HumedadItem from "./HumedadItem";
 import { getData } from "../API/API";
 
-const TempList = () => {
+const HumedadList = () => {
   const [data, setData] = useState([]);
   const [refreshing, setRefreshing] = useState(false)
 
   const loadData = async () => {
     const datos = await getData();
-    setData(datos)
-    // console.log(datos)
+    setData(datos);
   };
 
   useEffect(() => {
     loadData();
   }, []);
 
+  const renderItem = ({ item }) => {
+    return <HumedadItem data={item} />;
+  };
+
   const onRefresh = async () => {
     setRefreshing(true)
     await getData();
     setRefreshing(false)
   }
-
-  const renderItem = ({ item }) => {
-    return <TempItem data={item} />;
-  };
 
   return (
     <FlatList
@@ -41,4 +40,4 @@ const TempList = () => {
   );
 };
 
-export default TempList;
+export default HumedadList;

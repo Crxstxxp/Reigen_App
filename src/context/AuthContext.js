@@ -15,7 +15,7 @@ const AuthContextProvider = ({ children }) => {
   };
   const [user, setUser] = useState(initialState);
   //Funcion para realizar la peticion a la base de datos y autenticar al usuario
-  const IP = "172.20.101.237";
+  const IP = "192.168.1.10";
   const login = async (user) => {
     try {
       const response = await fetch(`http://${IP}:5000/api/users/login`, {
@@ -31,12 +31,15 @@ const AuthContextProvider = ({ children }) => {
         const AuthUser = await response.json();
         setUser(AuthUser);
         await AsyncStorage.setItem("token", JSON.stringify(AuthUser.token));
+        return true
       } else {
         setUser(initialState);
+        return false
       }
     } catch (error) {
       console.log(error);
       setUser(initialState);
+      return false
     }
   };
   //Funcion para cerrar sesion y regresar al usuario a la pantalla de login
