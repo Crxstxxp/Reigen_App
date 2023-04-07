@@ -1,49 +1,44 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import React, { useContext } from "react";
-// import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StackActions, useNavigation } from "@react-navigation/native";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 import { AuthContext } from "../../context/AuthContext";
 import { GeneralStyles } from "../../theme/Styles";
+import TempContainer from "../../components/TempContainer";
+import HumeContainer from "../../components/HumeContainer";
 
 const HomeSreen = () => {
   const navigation = useNavigation();
   const { user } = useContext(AuthContext);
   const { logout } = useContext(AuthContext);
 
-  const getStoredValue = async () => {
-    try {
-      const value = await AsyncStorage.getItem("token");
-      if (value !== null) {
-        console.log(value);
-        // Aquí puedes hacer lo que necesites con el valor obtenido de Async Storage
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <View style={GeneralStyles.container}>
-      <Text style={GeneralStyles.subTitle}>HomeSreen</Text>
-      <Text style={GeneralStyles.subTitle}>{user.lastName}</Text>
-
-      <TouchableOpacity style={GeneralStyles.boton} onPress={getStoredValue}>
-        <Text style={{ fontSize: 20, marginTop: 10, color: "#fff" }}>
+      <TempContainer/>
+      <Text style={GeneralStyles.subTitle}>Ultima temperatura registrada </Text>
+      <TouchableOpacity
+        style={GeneralStyles.infoBoton}
+        onPress={() => navigation.navigate("TempScreen")}
+      >
+        <Text style={{ fontSize: 20, marginTop: 11, color: "#fff" }}>
           {" "}
-          Iniciar{" "}
+          Mas informacion{" "}
         </Text>
       </TouchableOpacity>
+      <HumeContainer />
+      <Text style={GeneralStyles.subTitle}>Ultima temperatura registrada </Text>
       <TouchableOpacity
-        style={GeneralStyles.boton}
-        onPress={async () => {
-          await logout;
-          navigation.dispatch(StackActions.replace("LoginStack"))
-        }}
+        style={GeneralStyles.infoBoton}
+        onPress={() => navigation.navigate("HumeScreen")}
       >
-        <Text style={{ fontSize: 20, marginTop: 10, color: "#fff" }}>
+        <Text style={{ fontSize: 20, marginTop: 11, color: "#fff" }}>
           {" "}
-          Cerrar sesion{" "}
+          Mas informacion{" "}
         </Text>
       </TouchableOpacity>
     </View>

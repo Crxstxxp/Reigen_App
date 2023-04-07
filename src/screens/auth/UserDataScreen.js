@@ -24,7 +24,7 @@ const UserDataScreen = () => {
     const id = user.id;
     const usuario = await getUserData(id);
     setUserData(usuario);
-    console.log(usuario);
+    // console.log(usuario);
   };
 
   useEffect(() => {

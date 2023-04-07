@@ -20,6 +20,7 @@ export const GeneralStyles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 20,
+    marginTop: 15,
     color: "gray",
   },
   Input: {
@@ -38,6 +39,15 @@ export const GeneralStyles = StyleSheet.create({
     width: 150,
     alignItems: "center",
     marginBottom: 5,
+  },
+  infoBoton: {
+    marginTop: 30,
+    backgroundColor: "#4853a4",
+    borderRadius: 20,
+    height: 50,
+    width: 250,
+    alignItems: "center",
+    marginBottom: -50,
   },
   image: {
     flex: 1,
@@ -60,13 +70,14 @@ export const TempStyles = StyleSheet.create({
     color: "#fff",
     marginTop: 20,
   },
-  TempSlider :{
-    width: "80%", marginTop: -20,
-    marginTop: 7
+  TempSlider: {
+    width: "80%",
+    marginTop: -20,
+    marginTop: 7,
   },
   TempSubTitle: {
     marginTop: 70,
     fontSize: 25,
     color: "#000",
   },
-})
+});
