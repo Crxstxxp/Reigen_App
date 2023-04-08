@@ -30,7 +30,7 @@ const AuthContextProvider = ({ children }) => {
         //Obtencion y guardado dentro de la aplicacion los valores obtenidos desde la base de datos
         const AuthUser = await response.json();
         setUser(AuthUser);
-        await AsyncStorage.setItem("token", JSON.stringify(AuthUser.token));
+        // await AsyncStorage.setItem("token", JSON.stringify(AuthUser.token));
         return true
       } else {
         setUser(initialState);

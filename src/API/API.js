@@ -13,21 +13,31 @@ export const SaveUser = async (user) => {
   return response.json();
 };
 
-export const getData = async () => {
-  const res = await fetch(`http://${IP}:5000/api/data`);
+export const getData = async (token) => {
+  const res = await fetch(`http://${IP}:5000/api/data`, {
+    headers: {
+      "x-access-token": token,
+    }
+  });
   return await res.json();
 };
 
-export const getUserData = async (id) => {
-  const res = await fetch(`http://${IP}:5000/api/users/${id}`);
+export const getUserData = async (id, token) => {
+  // console.log(token);
+  const res = await fetch(`http://${IP}:5000/api/users/${id}`, {
+    headers: {
+      "x-access-token": token,
+    }
+  });
   return await res.json();
 };
 
-export const updateUser = async (id, userData) => {
+export const updateUser = async (id, userData, token) => {
   const response = await fetch(`http://${IP}:5000/api/users/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      "x-access-token": token,
     },
     body: JSON.stringify(userData),
   });

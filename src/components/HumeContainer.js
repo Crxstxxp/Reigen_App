@@ -1,24 +1,27 @@
 import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { TempStyles } from "../theme/Styles";
 import Slider from "@react-native-community/slider";
 import { getData } from "../API/API";
+import { AuthContext } from "../context/AuthContext";
 
 const HumeContainer = () => {
+  const { user } = useContext(AuthContext);
   const [humedad, setHumedad] = useState([]);
 
   const loadHumedad = async () => {
-    const dato = await getData();
+    const token = user.token
+    const dato = await getData(token);
     const FirstHumedity = dato[1].sensors[0].humidity;
     setHumedad(parseFloat(FirstHumedity));
   };
 
   useEffect(() => {
-    loadHumedad()
-  }, [])
+    loadHumedad();
+  }, []);
 
- return (
-   <View style={TempStyles.TempContainer}>
+  return (
+    <View style={TempStyles.TempContainer}>
       <Text style={TempStyles.Grades}> {humedad}% </Text>
       <Slider
         style={TempStyles.TempSlider}
@@ -27,7 +30,7 @@ const HumeContainer = () => {
         minimumTrackTintColor={"#063970"}
         maximumTrackTintColor={"red"}
         thumbTintColor={"#000"}
-        value={humedad/100}
+        value={humedad / 100}
         disabled={true}
       />
     </View>

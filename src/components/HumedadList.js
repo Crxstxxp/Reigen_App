@@ -1,15 +1,18 @@
 import { FlatList, RefreshControl } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
+import { AuthContext } from "../context/AuthContext";
 import HumedadItem from "./HumedadItem";
 import { getData } from "../API/API";
 
 const HumedadList = () => {
+  const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
-  const [refreshing, setRefreshing] = useState(false)
+  const [refreshing, setRefreshing] = useState(false);
 
   const loadData = async () => {
-    const datos = await getData();
+    const token = user.token
+    const datos = await getData(token);
     setData(datos);
   };
 
@@ -22,10 +25,10 @@ const HumedadList = () => {
   };
 
   const onRefresh = async () => {
-    setRefreshing(true)
+    setRefreshing(true);
     await getData();
-    setRefreshing(false)
-  }
+    setRefreshing(false);
+  };
 
   return (
     <FlatList
@@ -33,7 +36,7 @@ const HumedadList = () => {
       data={data.slice(0, 8)}
       keyExtractor={(item) => item._id + ""}
       renderItem={renderItem}
-      refreshControl = {
+      refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     />

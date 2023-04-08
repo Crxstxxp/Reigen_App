@@ -22,7 +22,8 @@ const UserDataScreen = () => {
 
   const loadUserData = async () => {
     const id = user.id;
-    const usuario = await getUserData(id);
+    const token = user.token
+    const usuario = await getUserData(id, token);
     setUserData(usuario);
     // console.log(usuario);
   };
@@ -36,7 +37,8 @@ const UserDataScreen = () => {
 
   const handleUpdate = async () => {
     const id = user.id;
-    const updatedUser = await updateUser(id, userData);
+    const token = user.token
+    const updatedUser = await updateUser(id, userData, token);
     if (updatedUser) {
       Alert.alert(
         "Datos actualizados correctamente",
