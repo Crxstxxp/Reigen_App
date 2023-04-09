@@ -15,10 +15,11 @@ const AuthContextProvider = ({ children }) => {
   };
   const [user, setUser] = useState(initialState);
   //Funcion para realizar la peticion a la base de datos y autenticar al usuario
-  const IP = "192.168.1.10";
+  // const IP = "192.168.1.10";
+  const vercel = "https://reigen.vercel.app"
   const login = async (user) => {
     try {
-      const response = await fetch(`http://${IP}:5000/api/users/login`, {
+      const response = await fetch(`${vercel}/api/users/login`, {
         method: "POST",
         headers: {
           Accept: "application/json",
